@@ -5,10 +5,9 @@
 #define MAX_WIFI_CHANNEL 13
 uint8_t wifi_channel = 1;
 
-inline void setup_WiFi() __attribute__((always_inline)); // saves 32 bytes
+inline void setup_WiFi() __attribute__((always_inline));
 
 
-// Convert uint8_t addr to char array
 void convert_to_char(char* macAddress, const uint8_t addr[6])
 {
   for(int i = 0; i < 6; i++)
@@ -58,7 +57,7 @@ void sniffer(void* buf, wifi_promiscuous_pkt_type_t type)
 
 
     convert_to_char(cMacAddress, hdr->addr2);
-    if(strcmp(cMacAddress, lMacAddress))
+    if(strcmp(cMacAddress, lMacAddress)) // TODO: better filtering 
     {
         strcpy(lMacAddress, cMacAddress);
         hash_func(cMacAddress);
